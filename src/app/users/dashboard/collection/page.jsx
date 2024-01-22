@@ -1,37 +1,32 @@
 import Header from "@/components/Dashboard/Header"
-import { ArrowArcLeft } from "@phosphor-icons/react"
+import { authUserSession } from "@/libs/auth-libs"
+import prisma from "@/libs/prisma"
 import Image from "next/image"
 import Link from "next/link"
 
-const Page = () => {
+const Page = async () => {
+
+    const user = await authUserSession();
+    const collection = await prisma.collection.findMany({
+        where: { user_email: user.email }
+    })
+
     return(
         <section className="mt-4 px-4">
             <Header title={"My Collection"}/>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Link href="/" className="relative border-2 border-color-accent">
+            {collection.map((collect, index) => {
+                return(
+                    <Link key={index} href={`/anime/${collect.anime_mal_id}`} className="relative border-2 border-color-accent">
                     <Image src="" alt="" width={350} height={350} className="w-full"/>
                     <div className="absolute flex items-center justify-center bottom-0 w-full h-16 bg-color-accent">
                         <h5 className="text-xl text-center">Judul anime disini</h5>
                     </div>
                 </Link>
-                <Link href="/" className="relative border-2 border-color-accent">
-                    <Image src="" alt="" width={350} height={350} className="w-full"/>
-                    <div className="absolute flex items-center justify-center bottom-0 w-full h-16 bg-color-accent">
-                        <h5 className="text-xl text-center">Judul anime disini</h5>
-                    </div>
-                </Link>
-                <Link href="/" className="relative border-2 border-color-accent">
-                    <Image src="" alt="" width={350} height={350} className="w-full"/>
-                    <div className="absolute flex items-center justify-center bottom-0 w-full h-16 bg-color-accent">
-                        <h5 className="text-xl text-center">Judul anime disini</h5>
-                    </div>
-                </Link>
-                <Link href="/" className="relative border-2 border-color-accent">
-                    <Image src="" alt="" width={350} height={350} className="w-full"/>
-                    <div className="absolute flex items-center justify-center bottom-0 w-full h-16 bg-color-accent">
-                        <h5 className="text-xl text-center">Judul anime disini</h5>
-                    </div>
-                </Link>
+                )
+            })}
+
+
             </div>
         </section>
     )
