@@ -1,4 +1,4 @@
-const HeaderMenu = ({title}) => {
+const HeaderMenu = ({ title }) => {
     return (
         <div>
             <div className="p-8">

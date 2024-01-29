@@ -4,7 +4,7 @@ import { ArrowSquareLeft } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
 
 const Header = ({title}) => {
-    const router = userRouter()
+    const router = useRouter()
 
     const handleBack = (event) => {
         event.preventDefault()

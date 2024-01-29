@@ -6,7 +6,8 @@ const Header = ({title, LinkHref, LinkTitle}) => {
         <h1 className="text-2xl font-bold text-color-primary">{title}</h1>
         {
         LinkHref && LinkTitle ? 
-        <Link href={LinkHref} className="md:text-xl text-md underline hover:text-color-accent text-color-primary transition-all">
+        <Link href={LinkHref} 
+        className="md:text-xl text-md underline hover:text-color-accent text-color-primary transition-all">
         {LinkTitle}
         </Link>
         : null
